@@ -42,7 +42,7 @@ class EmployeeDetailVC: UIViewController {
     @IBAction func update(_ sender: UIButton) {
         loader.isHidden = false
         loader.startAnimating()
-        networkManager.putData(urlString: HTTP, id: index+1, data: ["empName":empName.text!,
+        networkManager.putData(urlString: HTTP, id:Int(id.text!)!, data: ["empName":empName.text!,
                                                              "empEmail":empEmail.text!,
                                                              "empDesignation":empDesignation.text!,
                                                              "empAddress":empAddress.text!]) { [weak self] success in
@@ -67,7 +67,7 @@ class EmployeeDetailVC: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {[weak self] (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(action) in
             
         }
         AlertBox.showAlert(title: "Delete", message: "Do you want to delete this Employee Data", viewController: self, actions: [okeyAction,cancelAction])

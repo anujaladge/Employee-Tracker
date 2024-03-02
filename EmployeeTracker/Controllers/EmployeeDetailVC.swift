@@ -62,7 +62,7 @@ class EmployeeDetailVC: UIViewController {
     
     @IBAction func deleteFromDatabase(_ sender: UIButton) {
         
-        let okeyAction = UIAlertAction(title: "Okey", style: .default) {[weak self] (action) in
+        let okeyAction = UIAlertAction(title: "Okey", style: .destructive) {[weak self] (action) in
             self?.networkManager.deleteData(urlString: HTTP, id:Int((self?.empDetails!.id)!)!)
             self?.navigationController?.popViewController(animated: true)
         }

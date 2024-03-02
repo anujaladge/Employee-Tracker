@@ -12,6 +12,7 @@ var HTTP = "https://65855313022766bcb8c85ff2.mockapi.io/employees/Employees"
 class EmployeeListVC: UIViewController{
     
     @IBOutlet weak var employeeListTableview:UITableView!
+    var refreshControl = UIRefreshControl()
     @IBOutlet weak var post: UIButton!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     
@@ -31,6 +32,9 @@ class EmployeeListVC: UIViewController{
         employeeListTableview.delegate = self
         employeeListTableview.dataSource = self
         employeeListTableview.register(UINib(nibName: "EmployeeCell", bundle: nil), forCellReuseIdentifier: "EmployeeCell")
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
+        refreshControl.addTarget(self, action: #selector(pullToRefresh(sender:)), for: .valueChanged)
+        employeeListTableview.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +54,16 @@ class EmployeeListVC: UIViewController{
         navigationController?.pushViewController(employeeForm, animated: true)
     }
     
+    
+    @objc func pullToRefresh(sender:UIRefreshControl){
+        sender.endRefreshing()
+        networkManager.getData(urlString: HTTP, model: [Employee].self) { employeeInfo in
+            DispatchQueue.main.async {
+                self.employeesInfo = employeeInfo
+                self.employeeListTableview.reloadData()
+            }
+        }
+    }
 
 }
 

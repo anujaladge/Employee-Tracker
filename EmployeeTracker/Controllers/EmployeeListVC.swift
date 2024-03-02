@@ -22,7 +22,7 @@ class EmployeeListVC: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.isNavigationBarHidden = true
         loader.startAnimating()
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white,NSAttributedString.Key.font :UIFont.systemFont(ofSize: 21.0)]

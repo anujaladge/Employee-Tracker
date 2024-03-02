@@ -20,21 +20,11 @@ class EmployeeFormVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //navigationItem.hidesBackButton = true
-        
-        GradientSetUP.applyGradient(view: submit)
-        submit.layer.cornerRadius = 15
-        submit.layer.masksToBounds = true
-        
-        TextFieldSetUp.setTextFieldSetUp(textField: empNameTextField, view: view)
-        TextFieldSetUp.setTextFieldSetUp(textField: empEmailTextField, view: view)
-        TextFieldSetUp.setTextFieldSetUp(textField: empDesignationTextField, view: view)
-        TextFieldSetUp.setTextFieldSetUp(textField: empAddressTextfield, view: view)
-        
-        
     }
     
+    @IBAction func backButton(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func postEmployeeInfo(_ sender: Any) {
         let employeeData = ["empName": empNameTextField.text!, "empEmail": empEmailTextField.text!, "empDesignation": empDesignationTextField.text!, "empAddress":empAddressTextfield.text!]
